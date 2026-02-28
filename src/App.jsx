@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from '@studio-freight/lenis';
 import { Menu, ArrowRight } from 'lucide-react';
+import PriceCalculator from './components/PriceCalculator';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -184,7 +185,7 @@ function App() {
         gsap.to(cursorOutlineRef.current, {
           x: posX,
           y: posY,
-          duration: 0.15,
+          duration: 0.2,
           ease: 'power2.out'
         });
       }
@@ -591,6 +592,7 @@ function App() {
           <p>&copy; 2026 Lumière Parlour.</p>
         </div>
       </footer>
+      <PriceCalculator />
     </>
   );
 }
