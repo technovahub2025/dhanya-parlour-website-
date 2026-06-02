@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from '@studio-freight/lenis';
-import { Menu, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import PriceCalculator from './components/PriceCalculator';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -10,10 +10,21 @@ gsap.registerPlugin(ScrollTrigger);
 function App() {
   const [activeService, setActiveService] = useState('hero'); // Default bg
   const [showOffer, setShowOffer] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState('');
+  const [serviceMenuOpen, setServiceMenuOpen] = useState(false);
   const heroImgRef = useRef(null);
   const cursorDotRef = useRef(null);
   const cursorOutlineRef = useRef(null);
   const marqueeRef = useRef(null);
+  const serviceSelectRef = useRef(null);
+
+  const serviceOptions = [
+    { value: 'hair', label: 'Hair Styling' },
+    { value: 'facial', label: 'Facial Treatment' },
+    { value: 'spa', label: 'Full Body Spa' },
+    { value: 'makeup', label: 'Bridal Artistry' },
+  ];
 
   // Initialize Lenis and Global Animations
   // Initialize Lenis and Global Animations
@@ -163,14 +174,36 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (showOffer) {
+    if (showOffer || mobileMenuOpen) {
       document.body.classList.add('no-scroll');
     } else {
       document.body.classList.remove('no-scroll');
     }
 
     return () => document.body.classList.remove('no-scroll');
-  }, [showOffer]);
+  }, [showOffer, mobileMenuOpen]);
+
+  useEffect(() => {
+    const onPointerDown = (event) => {
+      if (serviceSelectRef.current && !serviceSelectRef.current.contains(event.target)) {
+        setServiceMenuOpen(false);
+      }
+    };
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setServiceMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, []);
 
   // Cursor Logic
   useEffect(() => {
@@ -238,7 +271,7 @@ function App() {
     <>
       <div className="preloader">
         <div className="loader-content">
-          <span className="loader-text">LUMIÈRE</span>
+          <span className="loader-text">DHANYA'S MAKEOVER</span>
           <div className="loader-line"></div>
         </div>
       </div>
@@ -270,19 +303,28 @@ function App() {
       )}
 
       <nav className="navbar">
-        <div className="logo">LUMIÈRE</div>
-        <div className="nav-links">
-          <a href="#home">Home</a>
-          <a href="#offers">Offers</a>
-          <a href="#services">Services</a>
-          <a href="#modes">Modes</a>
-          <a href="#experience">The Experience</a>
-          <a href="#contact">Book Now</a>
+        <div className="logo">DHANYA'S MAKEOVER</div>
+        <div className={`nav-links ${mobileMenuOpen ? 'open' : ''}`}>
+          <a href="#home" onClick={() => setMobileMenuOpen(false)}>Home</a>
+          <a href="#offers" onClick={() => setMobileMenuOpen(false)}>Offers</a>
+          <a href="#services" onClick={() => setMobileMenuOpen(false)}>Services</a>
+          <a href="#modes" onClick={() => setMobileMenuOpen(false)}>Modes</a>
+          <a href="#experience" onClick={() => setMobileMenuOpen(false)}>The Experience</a>
+          <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Book Now</a>
         </div>
-        <button className="menu-btn" aria-label="Menu">
-          <Menu color="white" />
+        <button
+          className="menu-btn"
+          aria-label="Menu"
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
+        >
+          <span className="menu-line" />
+          <span className="menu-line" />
+          <span className="menu-line" />
         </button>
       </nav>
+
+      {mobileMenuOpen && <div className="mobile-nav-backdrop" onClick={() => setMobileMenuOpen(false)} />}
 
       <header id="home" className="hero">
         <div className="hero-bg">
@@ -294,7 +336,7 @@ function App() {
             <span className="offer-pill">50% Off</span>
             <span className="offer-text">Signature treatments this week only</span>
           </div>
-          <span className="subtitle">Une Expérience Unique</span>
+          <span className="subtitle">A Unique Experience</span>
           <h1>The Art of <br /> <em>Timeless Beauty</em></h1>
           <p>A sanctuary where precision meets luxury. Elevating your essence.</p>
           <div className="cta-wrapper">
@@ -541,7 +583,7 @@ function App() {
               <span>Elegance</span> <span className="separator">✦</span>
               <span>Sophistication</span> <span className="separator">✦</span>
               <span>Radiance</span> <span className="separator">✦</span>
-              <span>Lumière</span> <span className="separator">✦</span>
+              <span>Dhanya's Makeover</span> <span className="separator">✦</span>
             </span>
           ))}
         </div>
@@ -556,13 +598,37 @@ function App() {
               <input type="email" placeholder="Email" required />
             </div>
             <div className="form-row">
-              <select className="minimal-select" defaultValue="">
-                <option value="" disabled>Select Service</option>
-                <option value="hair">Hair Styling</option>
-                <option value="facial">Facial Treatment</option>
-                <option value="spa">Full Body Spa</option>
-                <option value="makeup">Bridal Artistry</option>
-              </select>
+              <div className="custom-select-wrap" ref={serviceSelectRef}>
+                <button
+                  type="button"
+                  className={`minimal-select custom-select-btn ${serviceMenuOpen ? 'open' : ''}`}
+                  onClick={() => setServiceMenuOpen((prev) => !prev)}
+                  aria-expanded={serviceMenuOpen}
+                  aria-haspopup="listbox"
+                  aria-label="Select Service"
+                >
+                  <span>{serviceOptions.find((option) => option.value === selectedService)?.label || 'Select Service'}</span>
+                  <span className="custom-select-arrow" aria-hidden="true" />
+                </button>
+                {serviceMenuOpen && (
+                  <div className="custom-select-menu" role="listbox" aria-label="Service options">
+                    {serviceOptions.map((option) => (
+                      <button
+                        key={option.value}
+                        type="button"
+                        className="custom-select-option"
+                        onClick={() => {
+                          setSelectedService(option.value);
+                          setServiceMenuOpen(false);
+                        }}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+                <input type="hidden" name="service" value={selectedService} />
+              </div>
               <input type="text" placeholder="Preferred Date" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} />
             </div>
             <button type="submit" className="magnetic-btn-submit" onMouseMove={handleMagnetMove} onMouseLeave={handleMagnetLeave}>Request Appointment</button>
@@ -573,23 +639,23 @@ function App() {
       <footer>
         <div className="footer-container">
           <div className="footer-col brand-col">
-            <h3 className="footer-logo">LUMIÈRE</h3>
+            <h3 className="footer-logo">DHANYA'S MAKEOVER</h3>
           </div>
           <div className="footer-col">
-            <h4>Address</h4>
-            <p>123 Luxury Avenue<br />Fashion District<br />New York, NY 10001</p>
+            <h4>Branches</h4>
+            <p>Karaikal Branch<br />Pondicherry Branch</p>
           </div>
           <div className="footer-col">
             <h4>Contact</h4>
-            <p>+1 (212) 555-0199<br />concierge@lumiere.com</p>
+            <p>+91 8072 966 960<br />concierge@dhanyasmakeover.com</p>
           </div>
           <div className="footer-col social-col">
-            <a href="#">Instagram</a>
+            <a href="https://www.instagram.com/dhanya_skin_hair__pondicherry?igsh=d2t1eWxoZzNqaDdm" target="_blank" rel="noreferrer">Instagram</a>
             <a href="#">Facebook</a>
           </div>
         </div>
         <div className="footer-bar">
-          <p>&copy; 2026 Lumière Parlour.</p>
+          <p>&copy; 2026 Dhanya's Makeover Parlour.</p>
         </div>
       </footer>
       <PriceCalculator />

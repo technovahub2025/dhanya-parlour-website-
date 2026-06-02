@@ -25,7 +25,7 @@ const ADDONS = [
 
 const COUPONS = {
   GLOW10: 10,
-  LUMI15: 15,
+  DHANYA15: 15,
   BRIDE20: 20,
 };
 
@@ -107,7 +107,7 @@ function PriceCalculator() {
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hi Lumiere, I want to book services. Subtotal: ${CURRENCY.format(subtotal)}, Discount: ${CURRENCY.format(discountAmount)}, GST: ${CURRENCY.format(gst)}, Total: ${CURRENCY.format(grandTotal)}.`
+    `Hi Dhanya's Makeover, I want to book services. Subtotal: ${CURRENCY.format(subtotal)}, Discount: ${CURRENCY.format(discountAmount)}, GST: ${CURRENCY.format(gst)}, Total: ${CURRENCY.format(grandTotal)}.`
   );
 
   return (
@@ -245,7 +245,7 @@ function PriceCalculator() {
               <button type="button" className="calc-reset" onClick={resetAll}>Reset</button>
               <button type="button" className="calc-total-btn">Calculate Total</button>
               <a
-                href={`https://wa.me/919999999999?text=${whatsappMessage}`}
+                href={`https://wa.me/918072966960?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noreferrer"
                 className="calc-wa"

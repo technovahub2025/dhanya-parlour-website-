@@ -344,6 +344,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   z-index: 100;
   mix-blend-mode: difference;
   transition: all 0.5s var(--easing);
@@ -399,6 +400,67 @@ a {
   background: none;
   border: none;
   color: #fff;
+}
+
+.menu-line {
+  position: absolute;
+  left: 50%;
+  width: 24px;
+  height: 2px;
+  border-radius: 999px;
+  background: #fff;
+  transform: translateX(-50%);
+  transform-origin: center;
+  transition:
+    transform 0.35s var(--easing),
+    opacity 0.25s var(--easing),
+    width 0.35s var(--easing),
+    background-color 0.35s var(--easing);
+}
+
+.menu-btn {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 12px;
+}
+
+.menu-line:nth-child(1) {
+  top: 14px;
+}
+
+.menu-line:nth-child(2) {
+  top: 21px;
+}
+
+.menu-line:nth-child(3) {
+  top: 28px;
+}
+
+.menu-btn:hover .menu-line {
+  background: var(--accent-color);
+}
+
+.menu-btn[aria-expanded='true'] .menu-line:nth-child(1) {
+  top: 21px;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.menu-btn[aria-expanded='true'] .menu-line:nth-child(2) {
+  opacity: 0;
+  width: 18px;
+}
+
+.menu-btn[aria-expanded='true'] .menu-line:nth-child(3) {
+  top: 21px;
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+.mobile-nav-backdrop {
+  display: none;
 }
 
 /* Hero Section */
@@ -1100,6 +1162,7 @@ a {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
+  align-items: start;
 }
 
 input,
@@ -1113,6 +1176,114 @@ select {
   font-size: 1rem;
   outline: none;
   border-radius: 0;
+  width: 100%;
+  min-width: 0;
+}
+
+select {
+  background-color: #0b0b0b;
+  color: #ffffff;
+  appearance: auto;
+  -webkit-appearance: menulist;
+  -moz-appearance: auto;
+}
+
+select option {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+select option:disabled {
+  color: #9a9a9a;
+}
+
+.custom-select-wrap {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.custom-select-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem 0;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+}
+
+.custom-select-btn span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.custom-select-btn.open {
+  border-bottom-color: var(--accent-color);
+}
+
+.custom-select-arrow {
+  flex-shrink: 0;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 2px solid rgba(255, 255, 255, 0.78);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.78);
+  transform: translateY(-25%) rotate(45deg);
+  transition: transform 0.28s var(--easing), border-color 0.28s var(--easing);
+}
+
+.custom-select-btn.open .custom-select-arrow {
+  transform: translateY(25%) rotate(-135deg);
+  border-color: var(--accent-color);
+}
+
+.custom-select-menu {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.5rem;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 16px;
+  background: rgba(8, 8, 8, 0.98);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.45);
+  max-height: min(280px, 48vh);
+  overflow: auto;
+}
+
+.custom-select-option {
+  width: 100%;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 0.85rem 0.95rem;
+  border-radius: 12px;
+  transition: background 0.25s var(--easing), border-color 0.25s var(--easing), transform 0.25s var(--easing);
+}
+
+.custom-select-option:hover,
+.custom-select-option:focus-visible {
+  background: rgba(212, 175, 55, 0.14);
+  border-color: rgba(212, 175, 55, 0.35);
+  transform: translateX(2px);
 }
 
 input::placeholder {
@@ -1190,11 +1361,6 @@ footer {
 
   .nav-links {
     display: none;
-  }
-
-  .menu-btn {
-    display: block;
-    filter: invert(1);
   }
 
   .navbar {
@@ -1394,19 +1560,83 @@ video {
 }
 
 @media (max-width: 992px) {
-  .nav-links {
-    display: none;
+  .menu-btn {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    z-index: 1004;
   }
 
-  .menu-btn {
-    display: block;
-    filter: invert(1);
+  .menu-line {
+    background: #fff;
   }
 
   .navbar {
     mix-blend-mode: normal;
     background: rgba(5, 5, 5, 0.72);
     backdrop-filter: blur(8px);
+    padding: 1rem 1rem;
+    z-index: 1003;
+  }
+
+  .nav-scrolled {
+    padding: 1rem 1rem !important;
+  }
+
+  .logo {
+    padding-right: 0;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(86vw, 320px);
+    height: 100dvh;
+    padding: 5.5rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+    background: rgba(5, 5, 5, 0.97);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: -24px 0 60px rgba(0, 0, 0, 0.45);
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.35s var(--easing), opacity 0.35s var(--easing), visibility 0.35s var(--easing);
+    z-index: 1002;
+  }
+
+  .nav-links.open {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .nav-links a {
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+    padding-bottom: 0;
+    color: #fff;
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  .mobile-nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 1001;
   }
 
   .hero {
@@ -1433,6 +1663,11 @@ video {
 
   .offer-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .offer-card-head,
+  .offer-price {
+    flex-wrap: wrap;
   }
 
   .offer-details-top,
@@ -1496,7 +1731,12 @@ video {
 
 @media (max-width: 768px) {
   .navbar {
-    padding: 1rem 1rem;
+    padding: 0.95rem 0.9rem;
+  }
+
+  .logo {
+    font-size: 1rem;
+    letter-spacing: 2px;
   }
 
   .subtitle {
@@ -1517,6 +1757,8 @@ video {
   .booking-minimal {
     padding-top: 4rem;
     padding-bottom: 4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .offer-title h2 {
@@ -1543,6 +1785,10 @@ video {
     padding: 1.5rem 0;
   }
 
+  .service-name {
+    line-height: 1.05;
+  }
+
   .service-num {
     margin-right: 1rem;
   }
@@ -1555,6 +1801,16 @@ video {
     gap: 1.5rem;
   }
 
+  .custom-select-menu {
+    padding: 0.4rem;
+    max-height: min(260px, 42vh);
+  }
+
+  .custom-select-option {
+    font-size: 0.9rem;
+    padding: 0.8rem 0.85rem;
+  }
+
   .magnetic-btn-submit {
     width: 100%;
     padding: 1rem 1.2rem;
@@ -1563,6 +1819,10 @@ video {
 
   .footer-container {
     grid-template-columns: 1fr;
+  }
+
+  .footer-col {
+    text-align: left;
   }
 }
 
@@ -1604,8 +1864,75 @@ video {
     font-size: 2rem;
   }
 
+  .offer-card-mini,
+  .offer-detail-card,
+  .offer-spotlight,
+  .mode-card {
+    padding: 1.25rem;
+  }
+
+  .offer-card-head {
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .offer-card-mini h4,
+  .offer-detail-card h4,
+  .offer-spotlight h3 {
+    font-size: 1.2rem;
+  }
+
   .mode-card {
     padding: 1.2rem;
+  }
+
+  .mode-card h3 {
+    font-size: 1.6rem;
+  }
+
+  .mode-subtitle {
+    letter-spacing: 1.5px;
+  }
+
+  .scroll-indicator {
+    bottom: 1rem;
+    transform: translateX(-50%) scale(0.9);
+  }
+
+  .experience-editorial h2 {
+    font-size: clamp(1.8rem, 9vw, 2.4rem);
+  }
+
+  .editorial-image {
+    height: 300px;
+  }
+
+  .booking-wrapper h2 {
+    font-size: clamp(1.9rem, 9vw, 2.8rem);
+  }
+
+  .footer-col p,
+  .footer-col a {
+    font-size: 0.85rem;
+  }
+
+  .custom-select-btn {
+    gap: 0.75rem;
+    font-size: 0.92rem;
+  }
+
+  .custom-select-arrow {
+    width: 0.48rem;
+    height: 0.48rem;
+  }
+
+  .custom-select-menu {
+    border-radius: 14px;
+  }
+
+  .custom-select-option {
+    font-size: 0.88rem;
+    padding: 0.75rem 0.8rem;
   }
 }
 
