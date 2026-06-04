@@ -12,19 +12,74 @@ function App() {
   const [showOffer, setShowOffer] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('');
+  const [bookingName, setBookingName] = useState('');
+  const [bookingEmail, setBookingEmail] = useState('');
+  const [preferredDate, setPreferredDate] = useState('');
   const [serviceMenuOpen, setServiceMenuOpen] = useState(false);
+  const [expandedServiceGroup, setExpandedServiceGroup] = useState('hair-services');
   const heroImgRef = useRef(null);
   const cursorDotRef = useRef(null);
   const cursorOutlineRef = useRef(null);
   const marqueeRef = useRef(null);
   const serviceSelectRef = useRef(null);
+  const serviceMenuScrollRef = useRef(null);
+  const serviceMenuContentRef = useRef(null);
+  const serviceMenuLenisRef = useRef(null);
 
-  const serviceOptions = [
-    { value: 'hair', label: 'Hair Styling' },
-    { value: 'facial', label: 'Facial Treatment' },
-    { value: 'spa', label: 'Full Body Spa' },
-    { value: 'makeup', label: 'Bridal Artistry' },
+  const serviceGroups = [
+    {
+      id: 'hair-services',
+      label: 'Hair Services',
+      options: [
+        { value: 'hair-styling', label: 'Hair Styling' },
+        { value: 'hair-straightening', label: 'Hair Straightening' },
+        { value: 'permanent-hair-treatment', label: 'Permanent Hair Treatment' },
+        { value: 'hair-care-treatment', label: 'Hair Care Treatment' },
+      ],
+    },
+    {
+      id: 'skin-facial-services',
+      label: 'Skin & Facial Services',
+      options: [
+        { value: 'facial-treatment', label: 'Facial Treatment' },
+        { value: 'hydra-facial', label: 'Hydra Facial' },
+        { value: 'skin-care-treatment', label: 'Skin Care Treatment' },
+      ],
+    },
+    {
+      id: 'bridal-services',
+      label: 'Bridal Services',
+      options: [
+        { value: 'bridal-artistry', label: 'Bridal Artistry' },
+        { value: 'bridal-makeup', label: 'Bridal Makeup' },
+        { value: 'saree-draping-pre-pleating', label: 'Saree Draping & Pre-Pleating' },
+      ],
+    },
+    {
+      id: 'spa-wellness',
+      label: 'Spa & Wellness',
+      options: [
+        { value: 'foot-care', label: 'Foot Care' },
+        { value: 'foot-relaxation-therapy', label: 'Foot Relaxation Therapy' },
+        { value: 'basic-pedicure', label: 'Basic Pedicure' },
+        { value: 'spa-pedicure', label: 'Spa Pedicure' },
+      ],
+    },
+    {
+      id: 'specialized-treatments',
+      label: 'Specialized Treatments',
+      options: [
+        { value: 'invisive-pill-treatment', label: 'Invisive Pill Treatment' },
+      ],
+    },
   ];
+
+  const serviceOptions = serviceGroups.flatMap((group) => group.options);
+  const selectedServiceLabel = serviceOptions.find((option) => option.value === selectedService)?.label || 'Select Service';
+  const todayDate = new Date();
+  const minBookingDate = new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate())
+    .toISOString()
+    .split('T')[0];
 
   // Initialize Lenis and Global Animations
   // Initialize Lenis and Global Animations
@@ -40,12 +95,21 @@ function App() {
     // Sync with GSAP
     lenis.on('scroll', ScrollTrigger.update);
 
+    const handleCalcModalState = (event) => {
+      if (event?.detail?.open) {
+        lenis.stop();
+      } else {
+        lenis.start();
+      }
+    };
+
     const tickerFn = (time) => {
       lenis.raf(time * 1000);
     };
 
     gsap.ticker.add(tickerFn);
     gsap.ticker.lagSmoothing(0);
+    window.addEventListener('calc-modal-state', handleCalcModalState);
 
     // GSAP Context
     const ctx = gsap.context(() => {
@@ -159,6 +223,7 @@ function App() {
 
     return () => {
       gsap.ticker.remove(tickerFn);
+      window.removeEventListener('calc-modal-state', handleCalcModalState);
       ctx.revert(); 
       lenis.destroy();
     };
@@ -204,6 +269,85 @@ function App() {
       document.removeEventListener('keydown', onKeyDown);
     };
   }, []);
+
+  useEffect(() => {
+    if (serviceMenuOpen && !expandedServiceGroup) {
+      setExpandedServiceGroup('hair-services');
+    }
+  }, [serviceMenuOpen, expandedServiceGroup]);
+
+  useEffect(() => {
+    if (!serviceMenuOpen || !serviceMenuScrollRef.current || !serviceMenuContentRef.current) {
+      return undefined;
+    }
+
+    const lenis = new Lenis({
+      wrapper: serviceMenuScrollRef.current,
+      content: serviceMenuContentRef.current,
+      eventsTarget: serviceMenuScrollRef.current,
+      wheelEventsTarget: serviceMenuScrollRef.current,
+      duration: 0.85,
+      lerp: 0.12,
+      smoothWheel: true,
+      orientation: 'vertical',
+    });
+
+    serviceMenuLenisRef.current = lenis;
+
+    let rafId;
+    const raf = (time) => {
+      lenis.raf(time);
+      rafId = window.requestAnimationFrame(raf);
+    };
+
+    rafId = window.requestAnimationFrame(raf);
+
+    return () => {
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
+      lenis.destroy();
+      serviceMenuLenisRef.current = null;
+    };
+  }, [serviceMenuOpen]);
+
+  useEffect(() => {
+    if (!serviceMenuOpen) {
+      return;
+    }
+
+    const selectedGroup = serviceGroups.find((group) =>
+      group.options.some((option) => option.value === selectedService)
+    );
+
+    setExpandedServiceGroup(selectedGroup?.id || 'hair-services');
+  }, [selectedService, serviceMenuOpen]);
+
+  useEffect(() => {
+    if (!serviceMenuOpen || !selectedService) {
+      return undefined;
+    }
+
+    const scrollToSelected = () => {
+      const target = serviceMenuContentRef.current?.querySelector(
+        `[data-service-option="${selectedService}"]`
+      );
+
+      if (!target) {
+        return;
+      }
+
+      const lenis = serviceMenuLenisRef.current;
+      if (lenis) {
+        lenis.scrollTo(target, { offset: -24 });
+      } else {
+        target.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+    };
+
+    const rafId = window.requestAnimationFrame(scrollToSelected);
+    return () => window.cancelAnimationFrame(rafId);
+  }, [selectedService, serviceMenuOpen, expandedServiceGroup]);
 
   // Cursor Logic
   useEffect(() => {
@@ -264,6 +408,27 @@ function App() {
     const bg = document.querySelector(`.service-bg[data-bg="${activeService}"]`);
     if (bg) gsap.to(bg, { scale: 1, duration: 0.5 });
     // reset to default if desired, or keep last
+  };
+
+  const handleBookingSubmit = (event) => {
+    event.preventDefault();
+
+    const serviceLabel =
+      selectedServiceLabel === 'Select Service'
+        ? 'Not selected'
+        : selectedServiceLabel;
+
+    const bookingMessage = encodeURIComponent(
+      [
+        'Hi Dhanya\'s Makeover, I would like to book an appointment.',
+        `Name: ${bookingName || 'Not provided'}`,
+        `Email: ${bookingEmail || 'Not provided'}`,
+        `Service: ${serviceLabel}`,
+        `Preferred Date: ${preferredDate || 'Not selected'}`,
+      ].join('\n')
+    );
+
+    window.open(`https://wa.me/918072966960?text=${bookingMessage}`, '_blank', 'noopener,noreferrer');
   };
 
 
@@ -592,46 +757,122 @@ function App() {
       <section id="contact" className="booking-minimal">
         <div className="booking-wrapper">
           <h2>Begin Your <br /><em>Transformation</em></h2>
-          <form className="booking-form-minimal">
+          <form className="booking-form-minimal" onSubmit={handleBookingSubmit}>
             <div className="form-row">
-              <input type="text" placeholder="Name" required />
-              <input type="email" placeholder="Email" required />
+              <label className="booking-field">
+                <span>Name</span>
+                <input
+                  type="text"
+                  value={bookingName}
+                  onChange={(e) => setBookingName(e.target.value)}
+                  required
+                />
+              </label>
+              <label className="booking-field">
+                <span>Email</span>
+                <input
+                  type="email"
+                  value={bookingEmail}
+                  onChange={(e) => setBookingEmail(e.target.value)}
+                  required
+                />
+              </label>
             </div>
             <div className="form-row">
-              <div className="custom-select-wrap" ref={serviceSelectRef}>
-                <button
-                  type="button"
-                  className={`minimal-select custom-select-btn ${serviceMenuOpen ? 'open' : ''}`}
-                  onClick={() => setServiceMenuOpen((prev) => !prev)}
-                  aria-expanded={serviceMenuOpen}
-                  aria-haspopup="listbox"
-                  aria-label="Select Service"
-                >
-                  <span>{serviceOptions.find((option) => option.value === selectedService)?.label || 'Select Service'}</span>
-                  <span className="custom-select-arrow" aria-hidden="true" />
-                </button>
-                {serviceMenuOpen && (
-                  <div className="custom-select-menu" role="listbox" aria-label="Service options">
-                    {serviceOptions.map((option) => (
-                      <button
-                        key={option.value}
-                        type="button"
-                        className="custom-select-option"
-                        onClick={() => {
-                          setSelectedService(option.value);
-                          setServiceMenuOpen(false);
-                        }}
-                      >
-                        {option.label}
-                      </button>
-                    ))}
-                  </div>
-                )}
-                <input type="hidden" name="service" value={selectedService} />
+              <div className="booking-field booking-select-field">
+                <span>Select Service</span>
+                <div className="custom-select-wrap" ref={serviceSelectRef}>
+                  <button
+                    type="button"
+                    className={`minimal-select custom-select-btn ${serviceMenuOpen ? 'open' : ''}`}
+                    onClick={() => setServiceMenuOpen((prev) => !prev)}
+                    aria-expanded={serviceMenuOpen}
+                    aria-haspopup="listbox"
+                    aria-label="Select Service"
+                  >
+                    <span>{selectedServiceLabel}</span>
+                    <span className="custom-select-arrow" aria-hidden="true" />
+                  </button>
+                  {serviceMenuOpen && (
+                    <div
+                      className="custom-select-menu"
+                      role="listbox"
+                      aria-label="Service options"
+                      ref={serviceMenuScrollRef}
+                    >
+                      <div className="custom-select-menu-content" ref={serviceMenuContentRef}>
+                        {serviceGroups.map((group) => {
+                          const isOpen = expandedServiceGroup === group.id;
+
+                          return (
+                            <section key={group.id} className={`custom-select-group ${isOpen ? 'open' : ''}`}>
+                              <button
+                                type="button"
+                                className="custom-select-group-header"
+                                onClick={() =>
+                                  setExpandedServiceGroup((prev) => (prev === group.id ? '' : group.id))
+                                }
+                                aria-expanded={isOpen}
+                                aria-controls={`${group.id}-options`}
+                              >
+                                <span>{group.label}</span>
+                                <span className="custom-select-group-arrow" aria-hidden="true" />
+                              </button>
+
+                              {isOpen && (
+                                <div
+                                  id={`${group.id}-options`}
+                                  className="custom-select-group-options"
+                                >
+                                  {group.options.map((option) => {
+                                    const isSelected = selectedService === option.value;
+
+                                    return (
+                                      <button
+                                        key={option.value}
+                                        type="button"
+                                        className={`custom-select-option ${isSelected ? 'selected' : ''}`}
+                                        onClick={() => {
+                                          setSelectedService(option.value);
+                                          setServiceMenuOpen(false);
+                                        }}
+                                        data-service-option={option.value}
+                                        aria-selected={isSelected}
+                                      >
+                                        {option.label}
+                                      </button>
+                                    );
+                                  })}
+                                </div>
+                              )}
+                            </section>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                  <input type="hidden" name="service" value={selectedService} />
+                </div>
               </div>
-              <input type="text" placeholder="Preferred Date" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} />
+              <label className="booking-field booking-date-field">
+                <span>Preferred Date</span>
+                <input
+                  type="date"
+                  min={minBookingDate}
+                  value={preferredDate}
+                  onChange={(e) => setPreferredDate(e.target.value)}
+                  required
+                />
+              </label>
             </div>
-            <button type="submit" className="magnetic-btn-submit" onMouseMove={handleMagnetMove} onMouseLeave={handleMagnetLeave}>Request Appointment</button>
+            <button
+              type="submit"
+              className="magnetic-btn-submit"
+              onMouseMove={handleMagnetMove}
+              onMouseLeave={handleMagnetLeave}
+            >
+              Book Now on WhatsApp
+            </button>
           </form>
         </div>
       </section>
