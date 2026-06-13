@@ -36,6 +36,7 @@ function QuotationMaker() {
   const [expandedPackageIds, setExpandedPackageIds] = useState([]);
   const modalScrollRef = useRef(null);
   const modalContentRef = useRef(null);
+  const closeQuotationMaker = () => setIsOpen(false);
 
   const selectedServices = useMemo(
     () => getSelectedServices(QUOTATION_GROUPS, selectedIds),
@@ -87,9 +88,10 @@ function QuotationMaker() {
       content: modalContentRef.current,
       eventsTarget: modalScrollRef.current,
       wheelEventsTarget: modalScrollRef.current,
-      duration: 1.05,
-      lerp: 0.08,
+      duration: 1.2,
+      lerp: 0.1,
       smoothWheel: true,
+      wheelMultiplier: 0.9,
       orientation: 'vertical',
     });
 
@@ -107,6 +109,21 @@ function QuotationMaker() {
       }
       lenis.destroy();
     };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return undefined;
+    }
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        closeQuotationMaker();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
   }, [isOpen]);
 
   const clearError = (field) => {
@@ -180,14 +197,19 @@ function QuotationMaker() {
 
       {isOpen && (
         <div className="quote-modal" role="dialog" aria-modal="true" aria-label="Service quotation maker">
-          <button type="button" className="quote-backdrop" onClick={() => setIsOpen(false)} aria-label="Close" />
+          <button type="button" className="quote-backdrop" onClick={closeQuotationMaker} aria-label="Close" />
 
           <section className="quote-panel" ref={modalScrollRef}>
-            <div className="quote-panel-content" ref={modalContentRef}>
-              <button type="button" className="quote-close" onClick={() => setIsOpen(false)} aria-label="Close quotation maker">
-                x
-              </button>
+            <button
+              type="button"
+              className="quote-close"
+              onClick={closeQuotationMaker}
+              aria-label="Close quotation maker"
+            >
+              <X size={18} aria-hidden="true" />
+            </button>
 
+            <div className="quote-panel-content" ref={modalContentRef}>
               <header className="quote-header">
                 <h2>Service Quotation Maker</h2>
                 <p>Select the services you need and send your request on WhatsApp.</p>

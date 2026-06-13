@@ -35,6 +35,7 @@
   box-shadow:
     0 0 0 1px rgba(212, 175, 55, 0.06),
     0 0 26px rgba(212, 175, 55, 0.08);
+  will-change: left, top;
   transition:
     width var(--motion-med) var(--easing),
     height var(--motion-med) var(--easing),

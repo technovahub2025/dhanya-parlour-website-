@@ -10,10 +10,13 @@ export default function useSiteMotion() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const motionDuration = prefersReducedMotion ? 0 : 1;
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: prefersReducedMotion ? 0 : 1.35,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       direction: 'vertical',
       smooth: true,
+      smoothWheel: !prefersReducedMotion,
+      wheelMultiplier: 0.9,
+      touchMultiplier: 1,
     });
 
     lenis.on('scroll', ScrollTrigger.update);
@@ -30,9 +33,38 @@ export default function useSiteMotion() {
       }
     };
 
+    const handleAnchorClick = (event) => {
+      const anchor = event.target.closest?.('a[href^="#"]');
+      const hash = anchor?.getAttribute('href');
+
+      if (!hash || hash === '#') {
+        return;
+      }
+
+      const target = document.querySelector(hash);
+      if (!target) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (prefersReducedMotion) {
+        target.scrollIntoView();
+        window.history.replaceState(null, '', hash);
+        return;
+      }
+
+      lenis.scrollTo(target, {
+        duration: 1.25,
+        easing: (t) => 1 - Math.pow(1 - t, 4),
+        onComplete: () => window.history.replaceState(null, '', hash),
+      });
+    };
+
     gsap.ticker.add(tickerFn);
     gsap.ticker.lagSmoothing(0);
     window.addEventListener('quote-modal-state', handleQuoteModalState);
+    document.addEventListener('click', handleAnchorClick);
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
@@ -233,6 +265,7 @@ export default function useSiteMotion() {
     return () => {
       gsap.ticker.remove(tickerFn);
       window.removeEventListener('quote-modal-state', handleQuoteModalState);
+      document.removeEventListener('click', handleAnchorClick);
       ctx.revert();
       lenis.destroy();
     };

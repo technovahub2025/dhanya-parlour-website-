@@ -37,22 +37,23 @@ export default function useCursorEffects(cursorDotRef, cursorOutlineRef) {
     const magneticResetTimers = new WeakMap();
     let activeCard = null;
     let activeMagnetic = null;
+    let cursorInitialized = false;
 
     const moveDotX = gsap.quickTo(dot, 'left', {
-      duration: prefersReducedMotion ? 0 : 0.08,
-      ease: 'power3.out',
+      duration: prefersReducedMotion ? 0 : 0.1,
+      ease: 'power2.out',
     });
     const moveDotY = gsap.quickTo(dot, 'top', {
-      duration: prefersReducedMotion ? 0 : 0.08,
-      ease: 'power3.out',
+      duration: prefersReducedMotion ? 0 : 0.1,
+      ease: 'power2.out',
     });
     const moveOutlineX = gsap.quickTo(outline, 'left', {
-      duration: prefersReducedMotion ? 0 : 0.38,
-      ease: 'power3.out',
+      duration: prefersReducedMotion ? 0 : 0.24,
+      ease: 'power2.out',
     });
     const moveOutlineY = gsap.quickTo(outline, 'top', {
-      duration: prefersReducedMotion ? 0 : 0.38,
-      ease: 'power3.out',
+      duration: prefersReducedMotion ? 0 : 0.24,
+      ease: 'power2.out',
     });
 
     const getMagneticMotion = (element) => {
@@ -110,6 +111,11 @@ export default function useCursorEffects(cursorDotRef, cursorOutlineRef) {
       };
       const nextCard = isPointInside(cardCandidate) ? cardCandidate : null;
       const nextMagnetic = isPointInside(magneticCandidate) ? magneticCandidate : null;
+
+      if (!cursorInitialized) {
+        gsap.set([dot, outline], { left: posX, top: posY });
+        cursorInitialized = true;
+      }
 
       document.body.classList.add('cursor-visible');
       moveDotX(posX);
@@ -202,7 +208,7 @@ export default function useCursorEffects(cursorDotRef, cursorOutlineRef) {
     };
     const onMouseEnter = () => document.body.classList.add('cursor-visible');
 
-    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('pointermove', onMouseMove, { passive: true });
     document.addEventListener('pointerover', onPointerOver);
     document.addEventListener('pointerout', onPointerOut);
     window.addEventListener('mousedown', onMouseDown);
@@ -211,7 +217,7 @@ export default function useCursorEffects(cursorDotRef, cursorOutlineRef) {
     document.documentElement.addEventListener('mouseenter', onMouseEnter);
 
     return () => {
-      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('pointermove', onMouseMove);
       document.removeEventListener('pointerover', onPointerOver);
       document.removeEventListener('pointerout', onPointerOut);
       window.removeEventListener('mousedown', onMouseDown);
