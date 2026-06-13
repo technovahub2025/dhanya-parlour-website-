@@ -1,0 +1,12 @@
+export { default as BookingSection } from './BookingSection/BookingSection';
+export { default as BranchesSection } from './BranchesSection/BranchesSection';
+export { default as ExperienceSection } from './ExperienceSection/ExperienceSection';
+export { default as FooterSection } from './FooterSection/FooterSection';
+export { default as HeroSection } from './HeroSection/HeroSection';
+export { default as MarqueeSection } from './MarqueeSection/MarqueeSection';
+export { default as ModesSection } from './PackagesSection/PackagesSection';
+export { default as Navbar } from './Navbar/Navbar';
+export { default as OfferDetailsSection } from './OfferDetailsSection/OfferDetailsSection';
+export { default as OfferModal } from './OfferModal/OfferModal';
+export { default as OfferStrip } from './OfferStrip/OfferStrip';
+export { default as ServicesSection } from './ServicesSection/ServicesSection';

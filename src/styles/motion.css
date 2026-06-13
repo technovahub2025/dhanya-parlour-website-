@@ -1,0 +1,218 @@
+﻿/* Site-wide motion polish */
+.offer-card-mini,
+.offer-detail-card,
+.offer-spotlight,
+.fact-pill,
+.mode-card,
+.branch-card,
+.booking-service-picker {
+  --cursor-x: 50%;
+  --cursor-y: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.offer-card-mini,
+.offer-detail-card,
+.offer-spotlight,
+.fact-pill,
+.branch-card {
+  will-change: transform;
+}
+
+.offer-card-mini::before,
+.offer-detail-card::before,
+.offer-spotlight::before,
+.fact-pill::before,
+.mode-card::before,
+.branch-card::before,
+.booking-service-picker::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle 220px at var(--cursor-x) var(--cursor-y),
+    rgba(255, 239, 184, 0.16),
+    rgba(212, 175, 55, 0.07) 38%,
+    transparent 72%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--motion-med) var(--easing);
+}
+
+body.cursor-card .offer-card-mini:hover::before,
+body.cursor-card .offer-detail-card:hover::before,
+body.cursor-card .offer-spotlight:hover::before,
+body.cursor-card .fact-pill:hover::before,
+body.cursor-card .mode-card:hover::before,
+body.cursor-card .branch-card:hover::before,
+body.cursor-card .booking-service-picker:hover::before {
+  opacity: 1;
+}
+
+.offer-card-mini > *,
+.offer-detail-card > *,
+.offer-spotlight > *,
+.fact-pill > *,
+.mode-card > *,
+.branch-card > *,
+.booking-service-picker > * {
+  position: relative;
+  z-index: 1;
+}
+
+.offer-card-mini::after,
+.offer-detail-card::after,
+.mode-card::after,
+.branch-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 38%);
+  opacity: 0;
+  transition: opacity var(--motion-med) var(--easing);
+}
+
+.offer-card-mini:hover::after,
+.offer-detail-card:hover::after,
+.mode-card:hover::after,
+.branch-card:hover::after {
+  opacity: 1;
+}
+
+.offer-detail-card,
+.mode-card,
+.branch-card,
+.offer-spotlight,
+.fact-pill {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--motion-med) var(--easing),
+    border-color var(--motion-med) var(--easing),
+    box-shadow var(--motion-med) var(--easing),
+    background-color var(--motion-med) var(--easing);
+}
+
+.offer-detail-card:hover,
+.offer-spotlight:hover,
+.fact-pill:hover,
+.branch-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow:
+    0 22px 46px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.offer-primary,
+.offer-secondary,
+.offer-strip-cta,
+.offer-card-cta,
+.mode-cta,
+.branch-actions a,
+.branch-card-actions a,
+.magnetic-btn,
+.magnetic-btn-submit,
+.booking-service-chip,
+.booking-selected-tag {
+  transition:
+    transform var(--motion-med) var(--easing),
+    border-color var(--motion-med) var(--easing),
+    background-color var(--motion-med) var(--easing),
+    color var(--motion-med) var(--easing),
+    box-shadow var(--motion-med) var(--easing);
+}
+
+.offer-primary:hover,
+.offer-secondary:hover,
+.offer-strip-cta:hover,
+.offer-card-cta:hover,
+.mode-cta:hover,
+.magnetic-btn:hover,
+.magnetic-btn-submit:hover {
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+}
+
+.service-link {
+  transition:
+    color var(--motion-med) var(--easing),
+    padding-left var(--motion-med) var(--easing),
+    opacity var(--motion-med) var(--easing);
+}
+
+.service-bg {
+  transform: scale(1.02);
+  transition:
+    opacity var(--motion-slow) ease,
+    transform 1.2s var(--easing),
+    filter var(--motion-slow) ease;
+}
+
+.service-bg.active,
+.service-bg.active-default {
+  transform: scale(1.07);
+}
+
+.booking-field input,
+.booking-service-search,
+.booking-service-chip,
+.booking-selected-tag {
+  transition:
+    transform var(--motion-fast) var(--easing),
+    border-color var(--motion-fast) var(--easing),
+    background-color var(--motion-fast) var(--easing),
+    box-shadow var(--motion-fast) var(--easing);
+}
+
+.booking-field input:focus {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+.mobile-nav-backdrop {
+  animation: backdropFade var(--motion-med) ease both;
+}
+
+@keyframes backdropFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .offer-card-mini:hover,
+  .offer-detail-card:hover,
+  .offer-spotlight:hover,
+  .fact-pill:hover,
+  .branch-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .booking-service-picker:hover {
+    transform: none;
+    border-color: rgba(212, 175, 55, 0.42);
+    box-shadow:
+      0 18px 42px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(212, 175, 55, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.055);
+  }
+
+  .magnetic-btn:hover,
+  .offer-primary:hover,
+  .offer-strip-cta:hover,
+  .offer-card-cta:hover,
+  .mode-cta:hover,
+  .magnetic-btn-submit:hover {
+    transform: none;
+  }
+}
+

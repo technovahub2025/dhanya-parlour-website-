@@ -1,0 +1,655 @@
+﻿/* Global responsive hardening */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1200px) {
+  .navbar {
+    padding: 1.2rem 2rem;
+  }
+
+  .hero-content {
+    max-width: 760px;
+    padding: 0 1rem;
+  }
+
+  .offer-highlights,
+  .offer-details,
+  .modes-section,
+  .booking-minimal {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .offer-cards,
+  .offer-details-grid,
+  .modes-grid {
+    gap: 1rem;
+  }
+
+  .offer-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .services-content {
+    width: min(68%, 820px);
+  }
+
+  .mode-card {
+    padding: 1.4rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .menu-btn {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    z-index: 1004;
+  }
+
+  .menu-line {
+    background: #fff;
+  }
+
+  .navbar {
+    mix-blend-mode: normal;
+    background: rgba(5, 5, 5, 0.72);
+    backdrop-filter: blur(8px);
+    padding: 1rem 1rem;
+    z-index: 1003;
+  }
+
+  .nav-scrolled {
+    padding: 1rem 1rem !important;
+  }
+
+  .logo {
+    width: 140px;
+    min-width: 140px;
+    padding-right: 0;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(86vw, 320px);
+    height: 100dvh;
+    padding: 5.5rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+    background: rgba(5, 5, 5, 0.97);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: -24px 0 60px rgba(0, 0, 0, 0.45);
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.35s var(--easing), opacity 0.35s var(--easing), visibility 0.35s var(--easing);
+    z-index: 1002;
+  }
+
+  .nav-links.open {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .nav-links a {
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+    padding-bottom: 0;
+    color: #fff;
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  .mobile-nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 1001;
+  }
+
+  .hero {
+    min-height: 100svh;
+    height: auto;
+    padding: 8rem 1rem 4rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.6rem, 10vw, 4rem);
+    line-height: 1.05;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .offer-strip-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .offer-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .offer-price {
+    flex-wrap: wrap;
+  }
+
+  .offer-card-mini {
+    width: auto;
+  }
+
+  .offer-details-top,
+  .offer-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .offer-fast-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .services-list-section {
+    display: block;
+    min-height: auto;
+    padding-top: 5.5rem;
+  }
+
+  .services-content {
+    width: 100%;
+    padding: 0 6%;
+  }
+
+  .service-bg-container {
+    opacity: 0.25;
+  }
+
+  .service-name {
+    font-size: clamp(1.8rem, 6vw, 2.6rem);
+    overflow-wrap: anywhere;
+  }
+
+  .service-link {
+    align-items: center;
+    padding: 1.8rem 0;
+  }
+
+  .experience-editorial {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 5rem 6%;
+  }
+
+  .editorial-image {
+    height: 360px;
+    order: -1;
+  }
+
+  .modes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .modes-heading {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .modes-heading > p {
+    max-width: 680px;
+  }
+
+  .booking-wrapper h2 {
+    font-size: clamp(2.2rem, 7.5vw, 3.2rem);
+    margin-bottom: 2.2rem;
+  }
+
+  .booking-service-picker {
+    border-radius: 14px;
+  }
+
+  .branches-section {
+    padding: 5rem 6%;
+  }
+
+  .branches-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .branch-card p {
+    min-height: 0;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.95rem 0.9rem;
+  }
+
+  .logo {
+    width: 126px;
+    min-width: 126px;
+  }
+
+  .subtitle {
+    letter-spacing: 3px;
+    font-size: 0.75rem;
+  }
+
+  .offer-ribbon {
+    flex-direction: column;
+    gap: 0.45rem;
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+  }
+
+  .offer-highlights,
+  .offer-details,
+  .modes-section,
+  .booking-minimal {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .offer-title h2 {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+  }
+
+  .offer-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .offer-card-mini {
+    width: auto;
+  }
+
+  .modes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modes-heading {
+    margin-bottom: 1.5rem;
+  }
+
+  .mode-card h3 {
+    max-width: 100%;
+  }
+
+  .offer-fast-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .section-label {
+    margin-bottom: 1.5rem;
+  }
+
+  .service-link {
+    padding: 1.5rem 0;
+    gap: 0.8rem;
+  }
+
+  .service-name {
+    line-height: 1.05;
+  }
+
+  .service-num {
+    margin-right: 1rem;
+    flex-shrink: 0;
+  }
+
+  .service-arrow {
+    display: none;
+  }
+
+  .marquee-content {
+    font-size: 2.2rem;
+  }
+
+  .booking-form-minimal {
+    gap: 1.5rem;
+  }
+
+  .booking-date-field {
+    grid-column: 1 / -1;
+    max-width: none;
+  }
+
+  .booking-final-row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .booking-action-row {
+    justify-content: stretch;
+  }
+
+  .booking-service-picker {
+    padding: 0.78rem;
+  }
+
+  .booking-service-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .booking-service-chip-row {
+    padding-left: 0;
+  }
+
+  .booking-service-chip,
+  .booking-selected-tag {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    text-align: left;
+  }
+
+  .booking-selected-tags {
+    align-items: flex-start;
+  }
+
+  .custom-calendar {
+    width: min(350px, 100%);
+    max-width: 100%;
+  }
+
+  .magnetic-btn-submit {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    margin-top: 0;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-col {
+    text-align: left;
+  }
+
+  .branches-section {
+    padding: 4rem 1rem;
+  }
+
+  .branches-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .branch-actions,
+  .branch-card-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .branch-actions a,
+  .branch-card-actions a {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero {
+    padding-top: 8.6rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.9rem, 9.5vw, 2.5rem);
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  .magnetic-btn {
+    width: 100%;
+    padding: 1rem 1.1rem;
+  }
+
+  .offer-strip,
+  .offer-highlights,
+  .offer-details,
+  .modes-section,
+  .booking-minimal,
+  footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .offer-card {
+    padding: 2rem 1rem 1.5rem;
+  }
+
+  .offer-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .offer-card h3 {
+    font-size: 2rem;
+  }
+
+  .offer-card-mini,
+  .offer-detail-card,
+  .offer-spotlight,
+  .mode-card {
+    padding: 1.25rem;
+  }
+
+  .offer-card-mini {
+    height: auto;
+  }
+
+  .offer-card-head {
+    gap: 0.65rem 0.85rem;
+    min-height: 4.2rem;
+  }
+
+  .offer-card-mini h4,
+  .offer-detail-card h4,
+  .offer-spotlight h3 {
+    font-size: 1.2rem;
+  }
+
+  .mode-card {
+    padding: 1.2rem;
+  }
+
+  .mode-card h3 {
+    font-size: 1.6rem;
+  }
+
+  .mode-card-top,
+  .mode-price-row {
+    align-items: flex-start;
+  }
+
+  .mode-offer-badge {
+    max-width: calc(100% - 2.6rem);
+    white-space: normal;
+  }
+
+  .mode-price-row strong {
+    font-size: 1.2rem;
+  }
+
+  .mode-card .mode-description {
+    min-height: 0;
+  }
+
+  .mode-benefits span {
+    font-size: 0.63rem;
+  }
+
+  .mode-subtitle {
+    letter-spacing: 1.5px;
+  }
+
+  .scroll-indicator {
+    bottom: 1rem;
+    transform: translateX(-50%) scale(0.9);
+  }
+
+  .experience-editorial h2 {
+    font-size: clamp(1.8rem, 9vw, 2.4rem);
+  }
+
+  .editorial-image {
+    height: 300px;
+  }
+
+  .booking-wrapper h2 {
+    font-size: clamp(1.9rem, 9vw, 2.8rem);
+  }
+
+  .booking-service-category-head {
+    gap: 0.45rem;
+  }
+
+  .booking-service-category-head strong {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .booking-service-category-head small {
+    font-size: 0.62rem;
+    white-space: nowrap;
+  }
+
+  .booking-service-chip {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .booking-selected-tag {
+    max-width: 100%;
+  }
+
+  .custom-calendar {
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 0.72rem;
+  }
+
+  .custom-calendar-head {
+    grid-template-columns: 34px 1fr 34px;
+  }
+
+  .custom-calendar-head button {
+    width: 34px;
+    height: 34px;
+  }
+
+  .custom-calendar-grid {
+    gap: 0.15rem;
+  }
+
+  .branch-card {
+    padding: 1.25rem;
+  }
+
+  .branches-header h2 {
+    font-size: clamp(1.9rem, 9vw, 2.6rem);
+  }
+
+  .footer-col p,
+  .footer-col a {
+    font-size: 0.85rem;
+  }
+
+  .booking-date-field span {
+    font-size: 0.95rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .service-bg,
+  .service-bg.active,
+  .service-bg.active-default,
+  .editorial-image img,
+  .hero-bg img {
+    transform: none !important;
+  }
+
+  .marquee-content {
+    transform: none !important;
+  }
+
+  .offer-card-mini::before,
+  .offer-detail-card::before,
+  .offer-spotlight::before,
+  .fact-pill::before,
+  .mode-card::before,
+  .branch-card::before,
+  .booking-service-picker::before {
+    display: none !important;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+
+  .cursor-dot,
+  .cursor-outline {
+    display: none !important;
+  }
+
+  .offer-card-mini:hover,
+  .offer-detail-card:hover,
+  .offer-spotlight:hover,
+  .fact-pill:hover,
+  .mode-card:hover,
+  .branch-card:hover,
+  .booking-service-chip:hover,
+  .booking-selected-tag:hover {
+    transform: none;
+  }
+}

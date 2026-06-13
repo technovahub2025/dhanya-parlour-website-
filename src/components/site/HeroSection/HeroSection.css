@@ -1,0 +1,154 @@
+﻿/* Hero Section */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Animation handled by GSAP */
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.2) 0%, rgba(5, 5, 5, 0.8) 100%);
+  z-index: -1;
+}
+
+.hero-content {
+  z-index: 1;
+  max-width: 900px;
+}
+
+.offer-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.7rem;
+  color: var(--accent-secondary);
+}
+
+.offer-pill {
+  padding: 0.25rem 0.9rem;
+  border-radius: 999px;
+  background: var(--accent-color);
+  color: #111;
+  font-weight: 600;
+}
+
+.offer-text {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  color: var(--accent-secondary);
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.hero h1 {
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+
+.hero h1 em {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--accent-color);
+}
+
+.hero p {
+  font-size: 1.2rem;
+  max-width: 500px;
+  margin: 0 auto 3rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 300;
+}
+
+.magnetic-btn {
+  display: inline-block;
+  padding: 1.5rem 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.magnetic-btn:hover {
+  border-color: var(--accent-color);
+}
+
+.magnetic-btn .btn-text {
+  position: relative;
+  z-index: 2;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  display: block;
+  /* For GSAP */
+}
+
+/* Scroll Ind */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  z-index: 5;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.scroll-indicator .line {
+  width: 1px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-indicator .line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  transform: translateY(-100%);
+  /* Animation by GSAP */
+}
+

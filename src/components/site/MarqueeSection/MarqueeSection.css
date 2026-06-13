@@ -1,0 +1,40 @@
+﻿/* Marquee */
+.marquee-container {
+  padding: 2rem 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+  background: var(--bg-color);
+}
+
+.marquee-content {
+  white-space: nowrap;
+  /* animation: scrollText 30s linear infinite; REMOVED FOR GSAP */
+  font-family: var(--font-display);
+  font-size: 4rem;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  /* For accurate width calc */
+}
+
+.marquee-set,
+.marquee-item,
+.marquee-content .separator {
+  display: inline-block;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.marquee-item {
+  padding: 0 2rem;
+}
+
+.marquee-content .separator {
+  color: var(--accent-color);
+  -webkit-text-stroke: 0;
+  font-size: 2rem;
+  padding: 0 1rem;
+}
+

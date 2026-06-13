@@ -1,0 +1,88 @@
+﻿/* Responsive */
+@media (max-width: 900px) {
+  .modes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .navbar {
+    padding: 1.5rem 2rem;
+  }
+
+  .hero h1 {
+    font-size: 3.5rem;
+  }
+
+  .offer-ribbon {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .offer-strip-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .offer-cards {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .offer-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .offer-details-top {
+    grid-template-columns: 1fr;
+  }
+
+  .offer-fast-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .services-list-section {
+    display: block;
+    padding-top: 6rem;
+  }
+
+  .services-content {
+    width: 100%;
+  }
+
+  .service-bg-container {
+    opacity: 0.3;
+  }
+
+  .service-bg.active {
+    opacity: 0.3;
+  }
+
+  .service-name {
+    font-size: 2rem;
+  }
+
+  .experience-editorial {
+    grid-template-columns: 1fr;
+    padding: 5rem 5%;
+  }
+
+  .editorial-image {
+    height: 400px;
+    order: -1;
+    margin-bottom: 2rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+

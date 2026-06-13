@@ -1,0 +1,194 @@
+﻿.custom-date-picker {
+  position: relative;
+  width: 100%;
+}
+
+.custom-date-trigger {
+  width: 100%;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.62);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.3rem 0;
+  text-align: left;
+  transition:
+    color 0.24s var(--easing),
+    border-color 0.24s var(--easing),
+    box-shadow 0.24s var(--easing);
+}
+
+.custom-date-trigger:hover,
+.custom-date-trigger[aria-expanded='true'] {
+  border-color: rgba(212, 175, 55, 0.72);
+  color: #fff;
+}
+
+.custom-date-trigger:focus-visible {
+  outline: 0;
+  border-color: var(--accent-color);
+  box-shadow: 0 3px 0 rgba(212, 175, 55, 0.18);
+}
+
+.custom-date-trigger.has-value {
+  color: #fff;
+}
+
+.custom-date-trigger svg {
+  flex-shrink: 0;
+  color: var(--accent-secondary);
+}
+
+.custom-calendar {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 0.75rem);
+  z-index: 30;
+  width: min(350px, calc(100vw - 2rem));
+  border: 1px solid rgba(212, 175, 55, 0.36);
+  border-radius: 14px;
+  background:
+    radial-gradient(120% 100% at 100% 0%, rgba(212, 175, 55, 0.12), transparent 55%),
+    #11100d;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.58),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  padding: 0.9rem;
+  animation: calendarOpen 0.22s var(--easing) both;
+}
+
+.custom-calendar-head {
+  display: grid;
+  grid-template-columns: 36px 1fr 36px;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.custom-calendar-head strong {
+  color: #f4e9ca;
+  font-family: var(--font-heading);
+  font-size: 1.02rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.custom-calendar-head button {
+  width: 36px;
+  height: 36px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  transition:
+    transform 0.2s var(--easing),
+    border-color 0.2s var(--easing),
+    background-color 0.2s var(--easing);
+}
+
+.custom-calendar-head button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(212, 175, 55, 0.65);
+  background: rgba(212, 175, 55, 0.12);
+}
+
+.custom-calendar-head button:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+}
+
+.custom-calendar-weekdays,
+.custom-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.25rem;
+}
+
+.custom-calendar-weekdays {
+  margin-bottom: 0.35rem;
+}
+
+.custom-calendar-weekdays span {
+  color: rgba(244, 228, 188, 0.62);
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.custom-calendar-grid button {
+  aspect-ratio: 1;
+  min-width: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.88);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  transition:
+    transform 0.18s var(--easing),
+    border-color 0.18s var(--easing),
+    background-color 0.18s var(--easing),
+    color 0.18s var(--easing);
+}
+
+.custom-calendar-grid button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(212, 175, 55, 0.45);
+  background: rgba(212, 175, 55, 0.12);
+}
+
+.custom-calendar-grid button.outside-month {
+  color: rgba(255, 255, 255, 0.26);
+}
+
+.custom-calendar-grid button.today {
+  border-color: rgba(212, 175, 55, 0.5);
+  color: var(--accent-secondary);
+}
+
+.custom-calendar-grid button.selected {
+  border-color: var(--accent-color);
+  background: var(--accent-color);
+  color: #0b0904;
+  font-weight: 800;
+  box-shadow: 0 6px 16px rgba(212, 175, 55, 0.24);
+  animation: selectedPop 0.24s var(--easing);
+}
+
+.custom-calendar-grid button:disabled {
+  color: rgba(255, 255, 255, 0.16);
+  cursor: not-allowed;
+}
+
+.custom-calendar-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.16);
+}
+
+.custom-calendar-footer button {
+  border: 0;
+  background: transparent;
+  color: var(--accent-secondary);
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.25rem;
+}
+

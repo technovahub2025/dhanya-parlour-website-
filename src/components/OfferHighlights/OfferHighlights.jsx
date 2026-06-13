@@ -125,8 +125,8 @@ export default function OfferHighlights() {
       <div className="offer-highlights-inner">
         <div className="offer-title">
           <span className="offer-title-kicker">Offer Highlights</span>
-          <h2>Luxury, elevated. Prices, halved.</h2>
-          <p>Choose a signature treatment and enjoy our limited 50% celebration offer.</p>
+          <h2>Bridal glow, party glam, and beauty care.</h2>
+          <p>Choose makeup, skin care, hair care, or bridal services from Dhanya Makeup Studio Pondicherry and Karaikal.</p>
         </div>
         <div className="offer-cards-shell">
           <div className="offer-cards">
@@ -136,7 +136,7 @@ export default function OfferHighlights() {
           </div>
         </div>
         <div className="offer-note">
-          Limited slots available this week. Book now to secure your preferred time.
+          Limited slots available this week. Call 8072966960 or 8148966960 to secure your preferred time.
         </div>
       </div>
     </section>

@@ -1,0 +1,283 @@
+﻿/* Modes Section */
+.modes-section {
+  padding: 7rem 5%;
+  background:
+    radial-gradient(120% 120% at 80% 10%, rgba(212, 175, 55, 0.09), transparent 58%),
+    linear-gradient(180deg, #060606 0%, #090909 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+}
+
+.modes-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.modes-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  align-items: end;
+  gap: 2rem;
+  margin-bottom: 2.25rem;
+}
+
+.modes-heading h2 {
+  max-width: 720px;
+  margin-top: 0.85rem;
+  font-size: clamp(2.2rem, 4.4vw, 4rem);
+  line-height: 1.04;
+}
+
+.modes-heading > p {
+  color: rgba(255, 255, 255, 0.66);
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+
+.modes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.mode-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 1.6rem;
+  border-radius: 8px;
+  background:
+    radial-gradient(115% 85% at 100% 0%, rgba(212, 175, 55, 0.12), transparent 58%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018));
+  border: 1px solid rgba(212, 175, 55, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 18px 38px rgba(0, 0, 0, 0.3);
+  transition:
+    border-color 0.28s var(--easing),
+    box-shadow 0.28s var(--easing),
+    background-color 0.28s var(--easing);
+}
+
+.mode-card:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  background-color: rgba(212, 175, 55, 0.025);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 24px 50px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(212, 175, 55, 0.06);
+  transform: none;
+}
+
+.mode-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.mode-offer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+  border: 1px solid rgba(246, 223, 141, 0.72);
+  border-radius: 999px;
+  background:
+    linear-gradient(110deg, rgba(212, 175, 55, 0.26), rgba(212, 175, 55, 0.1)),
+    rgba(255, 255, 255, 0.035);
+  color: #fff0ad;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.9px;
+  line-height: 1.2;
+  padding: 0.38rem 0.65rem;
+  text-transform: uppercase;
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 55, 0.08),
+    0 6px 18px rgba(212, 175, 55, 0.12);
+}
+
+.mode-offer-badge svg {
+  flex-shrink: 0;
+}
+
+.mode-index {
+  flex-shrink: 0;
+  color: var(--accent-secondary);
+  letter-spacing: 2px;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.mode-card h3 {
+  max-width: 90%;
+  margin-bottom: 0.6rem;
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+}
+
+.mode-subtitle {
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 1.1rem;
+}
+
+.mode-card p {
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.7;
+}
+
+.mode-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.15rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.16);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.16);
+  padding: 0.8rem 0;
+}
+
+.mode-price-row > div {
+  display: grid;
+  gap: 0.18rem;
+}
+
+.mode-price-row span {
+  color: rgba(255, 255, 255, 0.58);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.mode-price-row small {
+  color: rgba(255, 255, 255, 0.54);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+}
+
+.mode-price-row strong {
+  color: var(--accent-secondary);
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+  white-space: nowrap;
+}
+
+.mode-card .mode-description {
+  min-height: 3.4em;
+  color: rgba(255, 255, 255, 0.76);
+  font-family: var(--font-body);
+  font-size: 0.91rem;
+  line-height: 1.65;
+}
+
+.mode-highlights {
+  display: grid;
+  gap: 0.52rem;
+  margin: 1.15rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mode-highlights li {
+  position: relative;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  padding-left: 1.05rem;
+}
+
+.mode-highlights li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+  font-size: 0.62rem;
+}
+
+.mode-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+  margin-top: 1.1rem;
+}
+
+.mode-benefits span {
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.035);
+  color: rgba(255, 255, 255, 0.72);
+  font-family: var(--font-body);
+  font-size: 0.66rem;
+  line-height: 1.2;
+  padding: 0.36rem 0.55rem;
+}
+
+.mode-card .mode-offer-copy {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.15rem 0 1.3rem;
+  border-radius: 8px;
+  border: 1px solid rgba(212, 175, 55, 0.42);
+  background:
+    linear-gradient(105deg, rgba(212, 175, 55, 0.22), rgba(212, 175, 55, 0.08)),
+    rgba(255, 255, 255, 0.025);
+  color: #fff0ad;
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.4;
+  padding: 0.68rem 0.75rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 8px 22px rgba(212, 175, 55, 0.08);
+}
+
+.mode-offer-copy svg {
+  flex-shrink: 0;
+}
+
+.mode-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.48rem;
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 0.72rem 1.05rem;
+  border: 1px solid rgba(212, 175, 55, 0.38);
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.06);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  transition:
+    color 0.25s var(--easing),
+    border-color 0.25s var(--easing);
+}
+
+.mode-cta:hover {
+  border-color: #f6df8d;
+  background: rgba(212, 175, 55, 0.12);
+  color: #f6df8d;
+  transform: none;
+}
+

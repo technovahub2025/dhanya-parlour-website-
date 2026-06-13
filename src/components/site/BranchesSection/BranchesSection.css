@@ -1,0 +1,121 @@
+﻿/* Branch Contact */
+.branches-section {
+  padding: 7rem 5%;
+  background:
+    radial-gradient(90% 100% at 82% 0%, rgba(212, 175, 55, 0.11), transparent 58%),
+    linear-gradient(180deg, #080808 0%, #030303 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.14);
+}
+
+.branches-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.branches-header {
+  max-width: 760px;
+  margin-bottom: 2rem;
+}
+
+.branches-header .section-label {
+  margin-bottom: 1.1rem;
+}
+
+.branches-header h2 {
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  line-height: 1.04;
+  margin-bottom: 1.2rem;
+}
+
+.branches-header p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.branch-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1.4rem;
+}
+
+.branch-actions a,
+.branch-card-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.75rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  background: rgba(255, 255, 255, 0.035);
+  color: #fff;
+  font-size: 0.78rem;
+  letter-spacing: 1.6px;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  transition: transform 0.28s var(--easing), border-color 0.28s var(--easing), background 0.28s var(--easing);
+}
+
+.branch-actions a:hover,
+.branch-card-actions a:hover {
+  border-color: rgba(212, 175, 55, 0.58);
+  background: rgba(212, 175, 55, 0.1);
+  transform: translateY(-2px);
+}
+
+.branches-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.branch-card {
+  min-width: 0;
+  padding: 2rem;
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+    radial-gradient(120% 100% at 100% 0%, rgba(212, 175, 55, 0.12), transparent 58%);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  box-shadow:
+    0 24px 50px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+}
+
+.branch-kicker {
+  display: inline-block;
+  margin-bottom: 0.9rem;
+  color: var(--accent-secondary);
+  font-size: 0.68rem;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+}
+
+.branch-card h3 {
+  font-family: var(--font-body);
+  font-size: clamp(1.45rem, 2vw, 1.8rem);
+  font-weight: 600;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.branch-card p {
+  min-height: 4.8rem;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.96rem;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+.branch-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
