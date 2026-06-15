@@ -5,6 +5,40 @@ video {
   height: auto;
 }
 
+@media (min-width: 993px) and (max-width: 1366px) {
+  .navbar {
+    padding: 1.1rem 2rem;
+  }
+
+  .logo {
+    width: 138px;
+    min-width: 138px;
+  }
+
+  .nav-links {
+    gap: clamp(1rem, 2.2vw, 2.2rem);
+  }
+
+  .nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 1.6px;
+  }
+
+  .hero {
+    min-height: 100svh;
+    height: auto;
+    padding: 7.5rem 1rem 4.5rem;
+  }
+
+  .hero-content {
+    max-width: 820px;
+  }
+
+  .offer-ribbon {
+    gap: 0.75rem;
+  }
+}
+
 @media (max-width: 1200px) {
   .navbar {
     padding: 1.2rem 2rem;
