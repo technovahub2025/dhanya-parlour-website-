@@ -10,6 +10,12 @@ export default function useSiteMotion() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const motionDuration = prefersReducedMotion ? 0 : 1;
+    const normalizeHomeUrl = () => {
+      if (window.location.hash) {
+        window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+      }
+    };
+
     const lenis = new Lenis({
       duration: prefersReducedMotion ? 0 : 1.35,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -48,17 +54,18 @@ export default function useSiteMotion() {
       }
 
       event.preventDefault();
+      const nextUrl = hash === '#home' ? `${window.location.pathname}${window.location.search}` : hash;
 
       if (prefersReducedMotion) {
         target.scrollIntoView();
-        window.history.replaceState(null, '', hash);
+        window.history.replaceState(null, '', nextUrl);
         return;
       }
 
       lenis.scrollTo(target, {
         duration: 1.25,
         easing: (t) => 1 - Math.pow(1 - t, 4),
-        onComplete: () => window.history.replaceState(null, '', hash),
+        onComplete: () => window.history.replaceState(null, '', nextUrl),
       });
     };
 
@@ -66,6 +73,9 @@ export default function useSiteMotion() {
     gsap.ticker.lagSmoothing(0);
     window.addEventListener('quote-modal-state', handleQuoteModalState);
     document.addEventListener('click', handleAnchorClick);
+    window.addEventListener('load', normalizeHomeUrl);
+    window.addEventListener('pageshow', normalizeHomeUrl);
+    normalizeHomeUrl();
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
@@ -416,6 +426,8 @@ export default function useSiteMotion() {
       gsap.ticker.remove(tickerFn);
       window.removeEventListener('quote-modal-state', handleQuoteModalState);
       document.removeEventListener('click', handleAnchorClick);
+      window.removeEventListener('load', normalizeHomeUrl);
+      window.removeEventListener('pageshow', normalizeHomeUrl);
       ctx.revert();
       lenis.destroy();
     };
