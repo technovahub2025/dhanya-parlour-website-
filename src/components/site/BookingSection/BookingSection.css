@@ -437,3 +437,109 @@
   }
 }
 
+@media (max-width: 992px) {
+  .booking-minimal {
+    padding: 8rem 4% 6rem;
+  }
+
+  .booking-wrapper {
+    max-width: 100%;
+  }
+
+  .booking-wrapper h2 {
+    font-size: clamp(2.6rem, 7vw, 3.4rem);
+    margin-bottom: 3rem;
+  }
+
+  .booking-form-minimal {
+    gap: 1.6rem;
+  }
+
+  .booking-service-row,
+  .booking-final-row,
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-final-row {
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+
+  .booking-action-row {
+    justify-content: stretch;
+  }
+
+  .magnetic-btn-submit {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .booking-minimal {
+    padding: 4rem 1rem 4.5rem;
+  }
+
+  .booking-wrapper h2 {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    margin-bottom: 2.25rem;
+  }
+
+  .booking-field > span,
+  .booking-service-head span {
+    font-size: 0.96rem;
+  }
+
+  .booking-field input {
+    font-size: 0.95rem;
+  }
+
+  .booking-service-picker {
+    padding: 0.85rem;
+    border-radius: 14px;
+  }
+
+  .booking-service-chip-row {
+    padding-left: 0.35rem;
+  }
+
+  .booking-service-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 576px) {
+  .booking-minimal {
+    padding: 3.5rem 1rem 4rem;
+  }
+
+  .booking-wrapper h2 {
+    font-size: clamp(1.8rem, 9vw, 2.4rem);
+  }
+
+  .booking-field {
+    gap: 0.55rem;
+  }
+
+  .booking-service-chip,
+  .booking-selected-tag {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .booking-service-chip-row {
+    padding-left: 0;
+  }
+
+  .booking-service-empty {
+    font-size: 0.8rem;
+  }
+
+  .magnetic-btn-submit {
+    padding: 1rem 1.2rem;
+    font-size: 0.78rem;
+  }
+}
+

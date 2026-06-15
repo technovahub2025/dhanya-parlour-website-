@@ -57,3 +57,50 @@ footer {
   color: #444;
 }
 
+@media (max-width: 992px) {
+  footer {
+    padding: 4rem 4% 2rem;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .footer-logo {
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  footer {
+    padding: 3.5rem 1rem 1.75rem;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .footer-col h4 {
+    margin-bottom: 1rem;
+  }
+
+  .footer-bar {
+    padding-top: 1.5rem;
+    font-size: 0.76rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-logo {
+    max-width: 160px;
+  }
+
+  .footer-col p,
+  .footer-col a {
+    font-size: 0.85rem;
+  }
+}
+

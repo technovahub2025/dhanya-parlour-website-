@@ -23,14 +23,9 @@ video {
     padding-right: 4%;
   }
 
-  .offer-cards,
   .offer-details-grid,
   .modes-grid {
     gap: 1rem;
-  }
-
-  .offer-cards {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .services-content {
@@ -144,19 +139,6 @@ video {
     grid-template-columns: 1fr;
     text-align: center;
     gap: 1rem;
-  }
-
-  .offer-cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.9rem;
-  }
-
-  .offer-price {
-    flex-wrap: wrap;
-  }
-
-  .offer-card-mini {
-    width: auto;
   }
 
   .offer-details-top,
@@ -283,16 +265,6 @@ video {
 
   .offer-title h2 {
     font-size: clamp(2rem, 8vw, 2.5rem);
-  }
-
-  .offer-cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .offer-card-mini {
-    width: auto;
   }
 
   .modes-grid {
@@ -453,31 +425,16 @@ video {
     padding: 2rem 1rem 1.5rem;
   }
 
-  .offer-cards {
-    grid-template-columns: 1fr;
-  }
-
   .offer-card h3 {
     font-size: 2rem;
   }
 
-  .offer-card-mini,
   .offer-detail-card,
   .offer-spotlight,
   .mode-card {
     padding: 1.25rem;
   }
 
-  .offer-card-mini {
-    height: auto;
-  }
-
-  .offer-card-head {
-    gap: 0.65rem 0.85rem;
-    min-height: 4.2rem;
-  }
-
-  .offer-card-mini h4,
   .offer-detail-card h4,
   .offer-spotlight h3 {
     font-size: 1.2rem;

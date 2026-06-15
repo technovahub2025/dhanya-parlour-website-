@@ -47,3 +47,60 @@
   filter: grayscale(0%);
 }
 
+@media (max-width: 992px) {
+  .experience-editorial {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 5rem 5%;
+  }
+
+  .editorial-image {
+    height: 420px;
+    order: -1;
+  }
+
+  .experience-editorial h2 {
+    font-size: clamp(2.2rem, 7vw, 3rem);
+  }
+
+  .experience-editorial p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .experience-editorial {
+    padding: 4rem 1rem;
+    gap: 1.5rem;
+  }
+
+  .editorial-subtitle {
+    margin-bottom: 1.25rem;
+    font-size: 0.75rem;
+  }
+
+  .experience-editorial h2 {
+    font-size: clamp(1.9rem, 8vw, 2.5rem);
+    margin-bottom: 1.25rem;
+  }
+
+  .experience-editorial p {
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .editorial-image {
+    height: 320px;
+  }
+}
+
+@media (max-width: 576px) {
+  .experience-editorial {
+    padding: 3.5rem 1rem;
+  }
+
+  .editorial-image {
+    height: 280px;
+  }
+}
+

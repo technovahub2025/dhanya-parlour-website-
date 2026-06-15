@@ -1,5 +1,4 @@
 ﻿/* Site-wide motion polish */
-.offer-card-mini,
 .offer-detail-card,
 .offer-spotlight,
 .fact-pill,
@@ -189,7 +188,6 @@ body.cursor-card .booking-service-picker:hover::before {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .offer-card-mini:hover,
   .offer-detail-card:hover,
   .offer-spotlight:hover,
   .fact-pill:hover,

@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from '@studio-freight/lenis';
 
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 export default function useSiteMotion() {
   useEffect(() => {
@@ -137,7 +138,7 @@ export default function useSiteMotion() {
         gsap.set([
           '.offer-strip-inner',
           '.offer-title',
-          '.offer-card-mini',
+          '.offer-cards-shell',
           '.offer-details-top',
           '.fact-pill',
           '.offer-detail-card',
@@ -161,6 +162,9 @@ export default function useSiteMotion() {
           '.branch-card',
           '.footer-col',
           '.footer-col a',
+          '.modes-grid-line',
+          '.mode-card-surface',
+          '.mode-timeline-dot',
         ], { clearProps: 'all' });
         return;
       }
@@ -231,20 +235,155 @@ export default function useSiteMotion() {
         ease: 'none',
       });
 
+      const timelineCards = gsap.utils.toArray('.mode-card');
+      timelineCards.forEach((card) => {
+        const surface = card.querySelector('.mode-card-surface');
+        const timelineDot = card.querySelector('.mode-timeline-dot');
+        const revealTargets = card.querySelectorAll(
+          'h3, .mode-subtitle, .mode-price-row, .mode-description, .mode-highlights li, .mode-benefits span, .mode-offer-copy, .mode-cta'
+        );
+        gsap.set(card, { autoAlpha: 0, y: 84 });
+        gsap.set(surface, {
+          scale: 0.985,
+          '--card-glow-x': '50%',
+          '--card-glow-y': '12%',
+        });
+        gsap.set(revealTargets, { autoAlpha: 0, y: 18 });
+        gsap.set(timelineDot, { scale: 0.9 });
+      });
+
+      ScrollTrigger.batch(timelineCards, {
+        start: 'top 60%',
+        interval: 0.12,
+        batchMax: 1,
+        onEnter: (batch) => {
+          batch.forEach((card) => {
+            const surface = card.querySelector('.mode-card-surface');
+            const timelineDot = card.querySelector('.mode-timeline-dot');
+            const revealTargets = card.querySelectorAll(
+              'h3, .mode-subtitle, .mode-price-row, .mode-description, .mode-highlights li, .mode-benefits span, .mode-offer-copy, .mode-cta'
+            );
+
+            gsap.killTweensOf([card, surface, timelineDot, revealTargets]);
+            gsap.timeline({ defaults: { overwrite: 'auto' } })
+              .to(card, {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.68,
+                ease: 'power4.out',
+              })
+              .to(surface, {
+                scale: 1,
+                duration: 0.5,
+                ease: 'power3.out',
+              }, '-=0.26')
+              .to(timelineDot, {
+                scale: 1,
+                duration: 0.24,
+                ease: 'power2.out',
+              }, '-=0.42')
+              .to(revealTargets, {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.42,
+                stagger: 0.025,
+                ease: 'power2.out',
+              }, '-=0.38');
+          });
+        },
+        onEnterBack: (batch) => {
+          batch.forEach((card) => {
+            const surface = card.querySelector('.mode-card-surface');
+            const timelineDot = card.querySelector('.mode-timeline-dot');
+            const revealTargets = card.querySelectorAll(
+              'h3, .mode-subtitle, .mode-price-row, .mode-description, .mode-highlights li, .mode-benefits span, .mode-offer-copy, .mode-cta'
+            );
+
+            gsap.killTweensOf([card, surface, timelineDot, revealTargets]);
+            gsap.timeline({ defaults: { overwrite: 'auto' } })
+              .to(card, {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.5,
+                ease: 'power4.out',
+              })
+              .to(surface, {
+                scale: 1,
+                duration: 0.42,
+                ease: 'power3.out',
+              }, '-=0.22')
+              .to(timelineDot, {
+                scale: 1,
+                duration: 0.22,
+                ease: 'power2.out',
+              }, '-=0.34')
+              .to(revealTargets, {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.34,
+                stagger: 0.02,
+                ease: 'power2.out',
+              }, '-=0.3');
+          });
+        },
+        onLeaveBack: (batch) => {
+          batch.forEach((card) => {
+            const surface = card.querySelector('.mode-card-surface');
+            const timelineDot = card.querySelector('.mode-timeline-dot');
+            const revealTargets = card.querySelectorAll(
+              'h3, .mode-subtitle, .mode-price-row, .mode-description, .mode-highlights li, .mode-benefits span, .mode-offer-copy, .mode-cta'
+            );
+
+            gsap.to(card, {
+              autoAlpha: 0,
+              y: 84,
+              duration: 0.18,
+              ease: 'power2.in',
+            });
+            gsap.to(surface, {
+              scale: 0.985,
+              duration: 0.18,
+              ease: 'power2.in',
+            });
+            gsap.to(revealTargets, {
+              autoAlpha: 0,
+              y: 18,
+              duration: 0.14,
+              stagger: 0.015,
+              ease: 'power2.in',
+            });
+            gsap.to(timelineDot, {
+              scale: 0.9,
+              duration: 0.14,
+              ease: 'power2.in',
+            });
+          });
+        },
+      });
+
       reveal('.offer-strip-inner', '.offer-strip');
       reveal('.offer-title', '.offer-highlights');
-      reveal('.offer-card-mini', '.offer-cards-shell', { y: 0 });
+      reveal('.offer-cards-shell', '.offer-highlights', { y: 0 });
       reveal('.offer-details-top', '.offer-details');
+      reveal('.offer-details-intro > *, .offer-spotlight > *', '.offer-details-top', {
+        y: 18,
+        stagger: 0.08,
+        duration: 0.72,
+      });
       reveal('.fact-pill', '.offer-fast-facts', { y: 0 });
       reveal('.offer-detail-card', '.offer-details-grid', { y: 0 });
+      reveal('.offer-detail-card h4, .offer-detail-card li, .proof-stats > div, .proof-stats strong, .proof-stats span', '.offer-details-grid', {
+        y: 14,
+        stagger: 0.04,
+        duration: 0.55,
+      });
       reveal('.service-item', '.services-list-section', { stagger: 0.06 });
       reveal('.modes-heading > *', '.modes-section', { stagger: 0.08 });
-      reveal('.mode-card', '.modes-grid', { y: 0, stagger: 0.08 });
-      reveal(
-        '.mode-card-top, .mode-price-row, .mode-benefits, .mode-offer-copy, .mode-cta',
-        '.modes-grid',
-        { y: 8, stagger: 0.025, duration: 0.4 }
-      );
+      reveal('.modes-heading h2, .modes-heading > p', '.modes-section', {
+        y: 18,
+        stagger: 0.08,
+        duration: 0.7,
+      });
       reveal('.experience-editorial h2, .experience-editorial p', '.experience-editorial', {
         stagger: 0.1,
       });
@@ -253,9 +392,20 @@ export default function useSiteMotion() {
       reveal('.booking-service-category', '.booking-service-list', { y: 8, stagger: 0.04 });
       reveal('.booking-final-row > *', '.booking-final-row', { y: 10, stagger: 0.08 });
       reveal('.branches-header', '.branches-section');
+      reveal('.branches-header h2, .branches-header p, .branch-card h3, .branch-card p, .branch-card a', '.branches-section', {
+        y: 16,
+        stagger: 0.05,
+        duration: 0.62,
+      });
       reveal('.branch-actions a', '.branch-actions', { y: 8, stagger: 0.04 });
       reveal('.branch-card', '.branches-grid', { y: 0, stagger: 0.08 });
       reveal('.footer-col', 'footer', { stagger: 0.08, start: 'top 92%' });
+      reveal('.footer-col h3, .footer-col p, .footer-col a, .footer-note', 'footer', {
+        y: 14,
+        stagger: 0.05,
+        duration: 0.6,
+        start: 'top 94%',
+      });
       reveal('.footer-col a', '.footer-container', { y: 8, stagger: 0.04, start: 'top 94%' });
     });
 
