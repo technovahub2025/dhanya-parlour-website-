@@ -1,4 +1,5 @@
 ﻿import { PRIMARY_PHONE, SECONDARY_PHONE } from '../../../data/contactData';
+import MagneticCta from '../../common/MagneticCta/MagneticCta';
 
 export default function OfferStrip() {
   return (
@@ -8,7 +9,9 @@ export default function OfferStrip() {
         <div className="offer-strip-copy">
           Book Your Beautiful Transformation Today! Call {PRIMARY_PHONE} / {SECONDARY_PHONE}.
         </div>
-        <a href="#contact" className="offer-strip-cta">Book Your Slot Now</a>
+        <MagneticCta href="#contact" className="offer-strip-cta" shineVariant="solid">
+          Book Your Slot Now
+        </MagneticCta>
       </div>
     </section>
   );

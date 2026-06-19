@@ -91,10 +91,6 @@
   transition: transform 0.3s var(--easing);
 }
 
-.offer-primary:hover {
-  transform: translateY(-2px);
-}
-
 .offer-secondary {
   padding: 0.9rem 2rem;
   border-radius: 999px;

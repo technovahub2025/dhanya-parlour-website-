@@ -451,25 +451,6 @@
   border-color: #f6df8d;
   background: rgba(212, 175, 55, 0.12);
   color: #f6df8d;
-  transform: none;
-}
-
-.mode-cta::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.16) 50%, transparent 80%);
-  opacity: 0;
-  transform: translateX(-50%);
-  transition: opacity 0.28s var(--easing), transform 0.4s var(--easing);
-  pointer-events: none;
-}
-
-.mode-cta:hover::after,
-.mode-cta:focus-visible::after {
-  opacity: 1;
-  transform: translateX(50%);
 }
 
 .mode-card:nth-child(even) .mode-card-surface {

@@ -2,8 +2,17 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react
 import gsap from 'gsap';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { OFFER_CARDS } from '../../data/offerHighlights';
+import MagneticCta from '../common/MagneticCta/MagneticCta';
 
 const AUTOPLAY_DELAY = 4000;
+
+function OfferCardCta({ card, isActive }) {
+  return (
+    <MagneticCta href="#contact" className="offer-card-cta" tabIndex={isActive ? 0 : -1} shineVariant="gold">
+      {card.cta}
+    </MagneticCta>
+  );
+}
 
 function OfferCard({ card, isActive }) {
   switch (card.type) {
@@ -28,7 +37,7 @@ function OfferCard({ card, isActive }) {
             </ul>
           </div>
           <p className="offer-card-note">{card.note}</p>
-          <a className="offer-card-cta" href="#contact" tabIndex={isActive ? 0 : -1}>{card.cta}</a>
+          <OfferCardCta card={card} isActive={isActive} />
         </div>
       );
     case 'hair':
@@ -53,7 +62,7 @@ function OfferCard({ card, isActive }) {
             </ul>
           </div>
           <p className="offer-card-note">{card.note}</p>
-          <a className="offer-card-cta" href="#contact" tabIndex={isActive ? 0 : -1}>{card.cta}</a>
+          <OfferCardCta card={card} isActive={isActive} />
         </div>
       );
     case 'extensions':
@@ -75,7 +84,7 @@ function OfferCard({ card, isActive }) {
               ))}
             </ul>
           </div>
-          <a className="offer-card-cta" href="#contact" tabIndex={isActive ? 0 : -1}>{card.cta}</a>
+          <OfferCardCta card={card} isActive={isActive} />
         </div>
       );
     case 'party':
@@ -96,7 +105,7 @@ function OfferCard({ card, isActive }) {
             </ul>
           </div>
           <p className="offer-card-note">{card.note}</p>
-          <a className="offer-card-cta" href="#contact" tabIndex={isActive ? 0 : -1}>{card.cta}</a>
+          <OfferCardCta card={card} isActive={isActive} />
         </div>
       );
     case 'bridal':
@@ -118,7 +127,7 @@ function OfferCard({ card, isActive }) {
             </ul>
           </div>
           <p className="offer-card-note">{card.note}</p>
-          <a className="offer-card-cta" href="#contact" tabIndex={isActive ? 0 : -1}>{card.cta}</a>
+          <OfferCardCta card={card} isActive={isActive} />
         </div>
       );
   }

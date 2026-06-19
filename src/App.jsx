@@ -1,5 +1,3 @@
-import { useRef } from 'react';
-import CustomCursor from './components/common/CustomCursor/CustomCursor';
 import Preloader from './components/common/Preloader/Preloader';
 import OfferHighlights from './components/OfferHighlights/OfferHighlights';
 import QuotationMaker from './components/QuotationMaker';
@@ -17,21 +15,15 @@ import {
   OfferStrip,
   ServicesSection,
 } from './components/site';
-import useCursorEffects from './hooks/useCursorEffects';
 import useSiteMotion from './hooks/useSiteMotion';
 
 function App() {
-  const cursorDotRef = useRef(null);
-  const cursorOutlineRef = useRef(null);
-
   useSiteMotion();
-  useCursorEffects(cursorDotRef, cursorOutlineRef);
 
   return (
     <>
       <Preloader />
       <div className="noise-overlay"></div>
-      <CustomCursor cursorDotRef={cursorDotRef} cursorOutlineRef={cursorOutlineRef} />
 
       <OfferModal />
       <Navbar />

@@ -1,4 +1,5 @@
 ﻿import { Crown, Gem, MessageCircle, Sparkles, Star } from 'lucide-react';
+import MagneticCta from '../../common/MagneticCta/MagneticCta';
 import { QUOTATION_GROUPS } from '../../QuotationMaker/quotationData';
 import { WHATSAPP_URL } from '../../../data/contactData';
 
@@ -76,15 +77,16 @@ export default function PackagesSection() {
                         <span>{mode.offerLabel || mode.footerLabel}</span>
                       </div>
 
-                      <a
+                      <MagneticCta
                         href={`${WHATSAPP_URL}?text=${bookingMessage}`}
                         className="mode-cta"
                         target="_blank"
                         rel="noreferrer"
+                        shineVariant="gold"
                       >
                         <MessageCircle size={16} aria-hidden="true" />
                         Book Package
-                      </a>
+                      </MagneticCta>
                     </div>
                   </>
                 ) : (
@@ -124,15 +126,16 @@ export default function PackagesSection() {
                         <span>{mode.offerLabel || mode.footerLabel}</span>
                       </div>
 
-                      <a
+                      <MagneticCta
                         href={`${WHATSAPP_URL}?text=${bookingMessage}`}
                         className="mode-cta"
                         target="_blank"
                         rel="noreferrer"
+                        shineVariant="gold"
                       >
                         <MessageCircle size={16} aria-hidden="true" />
                         Book Package
-                      </a>
+                      </MagneticCta>
                     </div>
                     <span className="mode-timeline-node" aria-hidden="true">
                       <span className="mode-timeline-dot" />

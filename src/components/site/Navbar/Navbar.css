@@ -38,16 +38,20 @@
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: clamp(1.2rem, 3vw, 3.2rem);
 }
 
 .nav-links a {
+  display: inline-flex;
+  align-items: center;
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 2px;
   color: #fff;
   position: relative;
   padding-bottom: 5px;
+  white-space: nowrap;
 }
 
 .nav-links a::after {
@@ -63,6 +67,25 @@
 
 .nav-links a:hover::after {
   width: 100%;
+}
+
+.nav-links .nav-cta {
+  min-height: 2rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  border-radius: 999px;
+  background: var(--accent-color);
+  color: #111;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-links .nav-cta::after {
+  display: none;
+}
+
+.nav-links .nav-cta:hover {
+  border-color: rgba(244, 228, 188, 0.8);
 }
 
 .menu-btn {

@@ -1,6 +1,6 @@
 @import './globals.css';
 @import '../components/common/Preloader/Preloader.css';
-@import '../components/common/CustomCursor/CustomCursor.css';
+@import '../components/common/MagneticCta/MagneticCta.css';
 @import '../components/site/OfferModal/OfferModal.css';
 @import './typography.css';
 @import '../components/site/Navbar/Navbar.css';

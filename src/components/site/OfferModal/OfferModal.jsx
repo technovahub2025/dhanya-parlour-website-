@@ -1,5 +1,6 @@
 ﻿import { useEffect, useState } from 'react';
 import useBodyScrollLock from '../../../hooks/useBodyScrollLock';
+import MagneticCta from '../../common/MagneticCta/MagneticCta';
 
 export default function OfferModal() {
   const [open, setOpen] = useState(false);
@@ -26,9 +27,9 @@ export default function OfferModal() {
         <h3>Book Your Beautiful Transformation</h3>
         <p>Reserve your bridal, party makeup, skin care, or hairstyling slot in Pondicherry or Karaikal.</p>
         <div className="offer-actions">
-          <a href="#contact" className="offer-primary" onClick={() => setOpen(false)}>
+          <MagneticCta href="#contact" className="offer-primary" shineVariant="solid" onClick={() => setOpen(false)}>
             Book Now
-          </a>
+          </MagneticCta>
           <button className="offer-secondary" onClick={() => setOpen(false)}>
             Maybe Later
           </button>

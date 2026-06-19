@@ -628,11 +628,6 @@ video {
     cursor: auto !important;
   }
 
-  .cursor-dot,
-  .cursor-outline {
-    display: none !important;
-  }
-
   .offer-card-mini:hover,
   .offer-detail-card:hover,
   .offer-spotlight:hover,

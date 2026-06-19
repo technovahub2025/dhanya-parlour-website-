@@ -1,0 +1,88 @@
+.magnetic-cta {
+  --magnetic-x: 0px;
+  --magnetic-y: 0px;
+  --magnetic-scale: 1;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+  transform: translate(var(--magnetic-x), var(--magnetic-y)) scale(var(--magnetic-scale));
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+}
+
+.magnetic-cta-content {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: inherit;
+  min-width: 0;
+}
+
+.magnetic-cta-content > svg {
+  flex-shrink: 0;
+}
+
+.magnetic-cta-shine {
+  position: absolute;
+  inset: 0 auto 0 -150%;
+  z-index: 1;
+  width: 60%;
+  height: 100%;
+  pointer-events: none;
+  transform: skewX(-20deg);
+  opacity: 0.9;
+}
+
+.magnetic-cta[data-shine-active='true'] .magnetic-cta-shine {
+  inset-inline: 150% auto;
+  transition: inset-inline 0.6s ease;
+}
+
+.magnetic-cta[data-shine-active='false'] .magnetic-cta-shine {
+  inset-inline: -150% auto;
+  transition: none;
+}
+
+.magnetic-cta--gold .magnetic-cta-shine {
+  background: linear-gradient(
+    110deg,
+    transparent,
+    rgba(255, 255, 255, 0.72),
+    rgba(207, 174, 91, 0.78),
+    transparent
+  );
+}
+
+.magnetic-cta--solid .magnetic-cta-shine {
+  background: linear-gradient(
+    110deg,
+    transparent,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 248, 220, 0.72),
+    transparent
+  );
+}
+
+.magnetic-cta--green .magnetic-cta-shine {
+  background: linear-gradient(
+    110deg,
+    transparent,
+    rgba(255, 255, 255, 0.72),
+    rgba(169, 230, 130, 0.68),
+    transparent
+  );
+}
+
+@media (hover: none), (pointer: coarse) {
+  .magnetic-cta {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .magnetic-cta-shine {
+    display: none;
+  }
+}

@@ -1,5 +1,6 @@
 ﻿import { useMemo, useState } from 'react';
 import { Search, X } from 'lucide-react';
+import MagneticCta from '../../common/MagneticCta/MagneticCta';
 import CustomDatePicker from '../../common/CustomDatePicker/CustomDatePicker';
 import { WHATSAPP_URL } from '../../../data/contactData';
 import { SERVICE_GROUPS, SERVICE_OPTIONS } from '../../../data/serviceData';
@@ -207,9 +208,9 @@ export default function BookingSection() {
                 )}
               </div>
               <div className="booking-action-row">
-                <button type="submit" className="magnetic-btn-submit">
+                <MagneticCta as="button" type="submit" className="magnetic-btn-submit" shineVariant="solid">
                   Book Now on WhatsApp
-                </button>
+                </MagneticCta>
               </div>
             </div>
           </div>

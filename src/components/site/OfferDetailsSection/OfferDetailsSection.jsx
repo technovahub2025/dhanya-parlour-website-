@@ -1,4 +1,5 @@
 ﻿import { PRIMARY_PHONE } from '../../../data/contactData';
+import MagneticCta from '../../common/MagneticCta/MagneticCta';
 
 export default function OfferDetailsSection() {
   return (
@@ -17,7 +18,7 @@ export default function OfferDetailsSection() {
             <span className="spotlight-kicker">Call To Book</span>
             <h3>{PRIMARY_PHONE}</h3>
             <p>Ask about bridal packages, pre-bridal care, party makeup, and hairstyling slots.</p>
-            <a href="#contact" className="offer-primary">Book Now</a>
+            <MagneticCta href="#contact" className="offer-primary" shineVariant="solid">Book Now</MagneticCta>
           </aside>
         </div>
         <div className="offer-fast-facts">
@@ -73,7 +74,7 @@ export default function OfferDetailsSection() {
                 <span>Enhanced bridal finish</span>
               </div>
             </div>
-            <a href="#contact" className="offer-primary proof-cta">Book Bridal Care</a>
+            <MagneticCta href="#contact" className="offer-primary proof-cta" shineVariant="solid">Book Bridal Care</MagneticCta>
           </article>
         </div>
       </div>

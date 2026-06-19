@@ -1,5 +1,6 @@
 ﻿import { useState } from 'react';
 import useBodyScrollLock from '../../../hooks/useBodyScrollLock';
+import MagneticCta from '../../common/MagneticCta/MagneticCta';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,7 +20,9 @@ export default function Navbar() {
           <a href="#modes" onClick={() => setMobileMenuOpen(false)}>Packages</a>
           <a href="#experience" onClick={() => setMobileMenuOpen(false)}>About</a>
           <a href="#contact-us" onClick={() => setMobileMenuOpen(false)}>Contact Us</a>
-          <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Book Now</a>
+          <MagneticCta href="#contact" className="nav-cta" shineVariant="solid" onClick={() => setMobileMenuOpen(false)}>
+            Book Now
+          </MagneticCta>
         </div>
         <button
           className="menu-btn"

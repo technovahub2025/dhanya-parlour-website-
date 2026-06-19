@@ -21,7 +21,6 @@
 }
 
 .quote-fab:hover {
-  transform: translateY(-3px);
   border-color: rgba(244, 228, 188, 0.78);
   box-shadow: 0 20px 36px rgba(0, 0, 0, 0.5);
 }
@@ -34,11 +33,6 @@
   place-items: center;
   padding: 1rem;
   overscroll-behavior: none;
-}
-
-.quote-modal,
-.quote-modal * {
-  cursor: none !important;
 }
 
 .quote-backdrop {
@@ -747,7 +741,6 @@ body.cursor-card .quote-package-chip-card:hover::before {
 }
 
 .quote-footer > button:hover {
-  transform: translateY(-2px);
   filter: brightness(1.08);
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.24);
 }
@@ -854,9 +847,9 @@ body.cursor-card .quote-package-chip-card:hover::before {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .quote-fab:hover,
-  .quote-wa:hover {
-    transform: none;
+  .quote-fab,
+  .quote-wa {
+    will-change: transform;
   }
 }
 

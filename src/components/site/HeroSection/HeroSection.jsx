@@ -1,4 +1,6 @@
-﻿export default function HeroSection() {
+﻿import MagneticCta from '../../common/MagneticCta/MagneticCta';
+
+export default function HeroSection() {
   return (
     <header id="home" className="hero">
       <div className="hero-bg">
@@ -14,9 +16,9 @@
         <h1>Your Dream Look, <br /> <em>Our Passion!</em></h1>
         <p>Bridal Makeup, HD Makeup, Airbrush Makeup & Glass Glow Makeup in Pondicherry and Karaikal.</p>
         <div className="cta-wrapper">
-          <a href="#contact" className="magnetic-btn">
+          <MagneticCta href="#contact" className="magnetic-btn" shineVariant="gold">
             <span className="btn-text">Book Your Slot Now</span>
-          </a>
+          </MagneticCta>
         </div>
       </div>
       <div className="scroll-indicator">

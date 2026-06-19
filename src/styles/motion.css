@@ -109,15 +109,9 @@ body.cursor-card .booking-service-picker:hover::before {
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-.offer-primary,
 .offer-secondary,
-.offer-strip-cta,
-.offer-card-cta,
-.mode-cta,
 .branch-actions a,
 .branch-card-actions a,
-.magnetic-btn,
-.magnetic-btn-submit,
 .booking-service-chip,
 .booking-selected-tag {
   transition:
@@ -196,21 +190,11 @@ body.cursor-card .booking-service-picker:hover::before {
   }
 
   .booking-service-picker:hover {
-    transform: none;
     border-color: rgba(212, 175, 55, 0.42);
     box-shadow:
       0 18px 42px rgba(0, 0, 0, 0.3),
       0 0 0 1px rgba(212, 175, 55, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.055);
-  }
-
-  .magnetic-btn:hover,
-  .offer-primary:hover,
-  .offer-strip-cta:hover,
-  .offer-card-cta:hover,
-  .mode-cta:hover,
-  .magnetic-btn-submit:hover {
-    transform: none;
   }
 }
 

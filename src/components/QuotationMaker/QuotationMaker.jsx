@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Lenis from '@studio-freight/lenis';
 import { ChevronDown, Search, X } from 'lucide-react';
+import MagneticCta from '../common/MagneticCta/MagneticCta';
 import { QUOTATION_GROUPS, WHATSAPP_NUMBER } from './quotationData';
 import {
   buildQuotationMessage,
@@ -186,14 +187,16 @@ function QuotationMaker() {
 
   return (
     <>
-      <button
+      <MagneticCta
+        as="button"
         type="button"
         className="quote-fab"
         onClick={() => setIsOpen(true)}
         aria-label="Open quotation maker"
+        shineVariant="solid"
       >
         Get Quotation
-      </button>
+      </MagneticCta>
 
       {isOpen && (
         <div className="quote-modal" role="dialog" aria-modal="true" aria-label="Service quotation maker">
@@ -404,10 +407,10 @@ function QuotationMaker() {
                     ))}
                   </div>
                   <button type="button" className="quote-reset" onClick={resetAll}>Reset</button>
-                  <button type="button" className="quote-wa" onClick={handleSendToWhatsApp}>
+                  <MagneticCta as="button" type="button" className="quote-wa" onClick={handleSendToWhatsApp} shineVariant="green">
                     <WhatsAppIcon />
                     Send to WhatsApp
-                  </button>
+                  </MagneticCta>
                 </div>
               </div>
             </div>
