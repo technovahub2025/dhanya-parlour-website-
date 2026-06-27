@@ -57,6 +57,17 @@ footer {
   color: #444;
 }
 
+.footer-bar a {
+  color: #777;
+  transition:
+    color var(--motion-fast) var(--easing),
+    opacity var(--motion-fast) var(--easing);
+}
+
+.footer-bar a:hover {
+  color: var(--accent-secondary);
+}
+
 @media (max-width: 992px) {
   footer {
     padding: 4rem 4% 2rem;

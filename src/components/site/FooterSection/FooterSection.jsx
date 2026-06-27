@@ -27,7 +27,9 @@ export default function FooterSection() {
         </div>
       </div>
       <div className="footer-bar">
-        <p>&copy; 2026 Dhanya Makeup Studio.</p>
+        <a href="https://technovahub.in/" target="_blank" rel="noreferrer">
+          &copy; 2026 TechnovaHub. All Rights Reserved.
+        </a>
       </div>
     </footer>
   );
